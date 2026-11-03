@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nirrox Games</title>
-  <link rel="stylesheet" href="style.css">
   
-  <!-- Logo de l'onglet (Favicon) -->
+  <!-- Fichier CSS avec version 0.5 pour forcer la mise à jour -->
+  <link rel="stylesheet" href="style.css?v=0.5">
+  
+  <!-- Logo affiché dans l'onglet du navigateur -->
   <link rel="icon" type="image/png" href="Nirrox Games.png">
 </head>
 <body>
 
-  <!-- Ton en-tête avec le logo réduit, le titre au milieu et la version à droite -->
+  <!-- Barre de navigation -->
   <header class="navbar">
     <div class="nav-gauche">
       <a href="index.html">
@@ -21,18 +23,21 @@
     
     <h1 class="nav-titre">Nirrox Games</h1>
     
-    <span class="nav-version">Version Alpha 0.4</span>
+    <span class="nav-version">Version Alpha 0.5</span>
   </header>
 
-  <!-- Contenu principal de ton site -->
-  <main style="padding: 40px; text-align: center;">
+  <!-- Contenu principal -->
+  <main id="contenu-principal" style="padding: 40px; text-align: center;">
     <h2>Bienvenue sur Nirrox Games !</h2>
     <p>Le site est ouvert et fonctionne normalement.</p>
   </main>
 
-  <!-- Script pour gérer le mode maintenance -->
-  <script src="maintenance.js"></script>
+  <!-- Script du fichier de configuration maintenance -->
+  <script src="maintenance.js?v=0.5"></script>
+
+  <!-- Script d'exécution du mode maintenance -->
   <script>
+    // Vérification de la variable définie dans maintenance.js
     if (typeof modeMaintenance !== 'undefined' && modeMaintenance === true) {
       document.body.innerHTML = `
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #121214; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px;">
