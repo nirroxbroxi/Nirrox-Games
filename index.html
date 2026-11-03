@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nirrox Games - Beta 1.O</title>
+  <title>Nirrox Games - Beta</title>
   
-  <!-- Cache-busting avec beta-1.0 -->
-  <link rel="stylesheet" href="style.css?v=beta-1.0">
+  <!-- Versioning beta-1.1 pour vider le cache du navigateur -->
+  <link rel="stylesheet" href="style.css?v=beta-1.1">
   <link rel="icon" type="image/png" href="Nirrox Games.png">
 </head>
 <body>
@@ -20,24 +20,23 @@
     </div>
     
     <h1 class="nav-titre">Nirrox Games</h1>
-    
-    <span class="nav-version">Version Beta 1.0</span>
+    <span class="nav-version">Version Beta 1.1</span>
   </header>
 
-  <!-- Contenu principal du site -->
+  <!-- Contenu principal (Affiché quand le site N'EST PAS en maintenance) -->
   <main id="contenu-principal" style="padding: 40px 20px; text-align: center; min-height: 60vh;">
     <h2>Bienvenue sur Nirrox Games !</h2>
     
-    <!-- Encadré d'annonce passage en Bêta -->
+    <!-- Message de bienvenue et statut -->
     <div style="margin: 30px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #4f46e5; padding: 25px; border-radius: 12px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
       <h3 style="color: #4f46e5; margin-top: 0; display: flex; align-items: center; gap: 10px;">
         🚀 Passage en Version Bêta !
       </h3>
       <p style="color: #e4e4e7; line-height: 1.6;">
-        Le site vient de franchir une étape clé. Nous sommes officiellement en <strong>Version Beta 1.0</strong>.
+        Le site est ouvert et fonctionnel en <strong>Version Beta 1.1</strong>.
       </p>
       <p style="color: #a1a1aa; line-height: 1.6;">
-        ⚠️ <strong>Note importante :</strong> Le site est en plein développement. Il risque donc d'y avoir quelques bugs ou des changements réguliers. Si vous remarquez un souci, rejoignez-nous sur Discord pour nous le signaler !
+        ⚠️ <strong>Note :</strong> Le site étant en plein développement, des ajustements sont faits régulièrement. Si vous remarquez un problème, contactez-nous sur Discord !
       </p>
       <div style="margin-top: 20px; text-align: center;">
         <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="background-color: #5865F2; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
@@ -45,26 +44,34 @@
         </a>
       </div>
     </div>
+
+    <!-- Encadré statut : Rien à rajouter -->
+    <div style="margin: 20px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #33333d; padding: 20px; border-radius: 10px; text-align: center;">
+      <h3 style="color: #22c55e; margin-top: 0;">✅ Statut du site</h3>
+      <p style="color: #d4d4d8; margin: 0;">Aucune maintenance en cours. Rien n'est à rajouter pour le moment !</p>
+    </div>
   </main>
 
-  <!-- Pied de page avec lien Discord -->
+  <!-- Pied de page -->
   <footer style="background-color: #1a1a1e; border-top: 2px solid #33333d; padding: 20px; text-align: center; color: #a1a1aa; font-size: 0.9rem;">
     <div style="margin-bottom: 10px;">
-      <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="color: #5865F2; font-weight: bold; text-decoration: none; margin: 0 15px;">💬 Rejoindre notre Discord</a>
+      <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="color: #5865F2; font-weight: bold; text-decoration: none; margin: 0 15px;">💬 Nous Contacter (Discord)</a>
       |
       <span style="margin: 0 15px; color: #22c55e;">🔒 Connexion Sécurisée</span>
     </div>
     <p style="margin: 5px 0 0 0;">&copy; 2026 Nirrox Games. Tous droits réservés.</p>
   </footer>
 
-  <!-- Script de maintenance -->
-  <script src="maintenance.js?v=beta-1.0"></script>
+  <!-- Chargement des parametres de maintenance (v=beta-1.1 force la mise a jour) -->
+  <script src="maintenance.js?v=beta-1.1"></script>
+
+  <!-- Execution de la bascule d'affichage -->
   <script>
     if (typeof modeMaintenance !== 'undefined' && modeMaintenance === true) {
       document.body.innerHTML = `
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background-color: #121214; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px;">
-          <h1 style="color: #ef4444; font-size: 2.5rem; margin-bottom: 10px;">🛠️ Site en Maintenance (Bêta)</h1>
-          <p style="font-size: 1.2rem; color: #a1a1aa; margin-bottom: 25px;">Nirrox Games prépare de nouvelles mises à jour Bêta.</p>
+          <h1 style="color: #ef4444; font-size: 2.5rem; margin-bottom: 10px;">🛠️ Site en Maintenance</h1>
+          <p style="font-size: 1.2rem; color: #a1a1aa; margin-bottom: 25px;">Nirrox Games est actuellement en cours de mise à jour.</p>
           
           <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
             <a href="en-savoir-plus.html" style="background-color: #4f46e5; color: white; padding: 12px 24px; font-size: 1rem; font-weight: bold; border-radius: 8px; text-decoration: none;">
