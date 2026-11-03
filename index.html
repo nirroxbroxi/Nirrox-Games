@@ -24,14 +24,14 @@
   </header>
 
   <!-- Contenu principal (Affiché quand le site est ouvert) -->
-  <main id="contenu-principal" style="padding: 40px 20px; text-align: center; min-height: 60vh;">
+  <main id="contenu-principal" style="padding: 40px 20px 90px 20px; text-align: center; min-height: 60vh;">
     <h2>Bienvenue sur Nirrox Games !</h2>
     
     <!-- Encadré Âge du Site (Chronomètre en arrière-plan) -->
     <div style="margin: 25px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #38bdf8; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15);">
       <h3 style="color: #38bdf8; margin-top: 0;">⏳ Âge officiel de Nirrox Games</h3>
       <p id="compteur-age" style="color: #ffffff; font-size: 1.2rem; font-weight: bold; font-family: monospace; margin: 10px 0;">
-        Calcul de l'âge du site...
+        Calcul en cours...
       </p>
       <p style="color: #a1a1aa; font-size: 0.85rem; margin: 0;">Le site évolue chaque jour grâce à vous !</p>
     </div>
@@ -61,15 +61,27 @@
     </div>
   </main>
 
-  <!-- Pied de page -->
-  <footer style="background-color: #1a1a1e; border-top: 2px solid #33333d; padding: 20px; text-align: center; color: #a1a1aa; font-size: 0.9rem;">
-    <div style="margin-bottom: 10px;">
-      <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="color: #5865F2; font-weight: bold; text-decoration: none; margin: 0 15px;">💬 Nous Contacter (Discord)</a>
-      |
-      <span style="margin: 0 15px; color: #22c55e;">🔒 Connexion Sécurisée</span>
+  <!-- Banderole de bas de page interactive (Fixée en bas) -->
+  <div style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #16161a; border-top: 1px solid #33333d; padding: 12px 20px; box-shadow: 0 -4px 15px rgba(0,0,0,0.5); z-index: 1000; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-family: sans-serif; font-size: 0.9rem; box-sizing: border-box;">
+    
+    <!-- Partie Gauche : Statut des jeux -->
+    <div style="color: #a1a1aa; display: flex; align-items: center; gap: 8px;">
+      <span style="color: #f59e0b; font-weight: bold;">🎮 Aucun jeu disponible pour le moment... Allez !</span>
     </div>
-    <p style="margin: 5px 0 0 0;">&copy; 2026 Nirrox Games. Tous droits réservés.</p>
-  </footer>
+
+    <!-- Partie Droite : Pourquoi Nirrox Games existe -->
+    <div style="color: #d4d4d8; max-width: 650px; text-align: left; font-size: 0.85rem;">
+      <strong style="color: #4f46e5;">Pourquoi Nirrox Games ?</strong> 
+      Créer un espace indépendant, fun et évolutif entre amis, partager nos créations, progresser en développement et bâtir une communauté passionnée ! 🚀
+    </div>
+
+    <!-- Bouton Discord rapide -->
+    <div>
+      <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="background-color: #5865F2; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.85rem;">
+        Discord
+      </a>
+    </div>
+  </div>
 
   <!-- Script de maintenance & chronomètre -->
   <script src="maintenance.js?v=beta-1.1"></script>
