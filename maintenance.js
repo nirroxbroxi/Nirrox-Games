@@ -3,7 +3,7 @@
 // ==========================================
 
 // Active (true) ou Désactive (false) le mode maintenance
-const modeMaintenance = false;
+const modeMaintenance = true;
 
 // Ton Webhook Discord configuré
 const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1567243944016744570/L2ZtLq84AaiL7nTiRa3X6FS8C1U944OfWJzczzt8HqHsbrTcIoXL9JHMlk9_XrNhmEoi";
