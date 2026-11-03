@@ -5,15 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nirrox Games</title>
   
-  <!-- Fichier CSS avec version 0.5 pour forcer la mise à jour -->
+  <!-- Versioning 0.5 pour contourner le cache du navigateur -->
   <link rel="stylesheet" href="style.css?v=0.5">
-  
-  <!-- Logo affiché dans l'onglet du navigateur -->
   <link rel="icon" type="image/png" href="Nirrox Games.png">
 </head>
 <body>
 
-  <!-- Barre de navigation -->
+  <!-- Barre de navigation / En-tête -->
   <header class="navbar">
     <div class="nav-gauche">
       <a href="index.html">
@@ -26,25 +24,62 @@
     <span class="nav-version">Version Alpha 0.5</span>
   </header>
 
-  <!-- Contenu principal -->
-  <main id="contenu-principal" style="padding: 40px; text-align: center;">
+  <!-- Contenu principal du site (quand le site est OUVERT) -->
+  <main id="contenu-principal" style="padding: 40px 20px; text-align: center; min-height: 60vh;">
     <h2>Bienvenue sur Nirrox Games !</h2>
-    <p>Le site est ouvert et fonctionne normalement.</p>
+    <p style="color: #a1a1aa;">Le site est actuellement ouvert et fonctionnel.</p>
+
+    <!-- Message indiquant que rien n'est à rajouter pour l'instant -->
+    <div style="margin: 30px auto; max-width: 500px; background-color: #1a1a1e; border: 1px solid #33333d; padding: 20px; border-radius: 10px;">
+      <h3 style="color: #22c55e; margin-top: 0;">✅ Statut du site</h3>
+      <p style="color: #d4d4d8; margin: 0;">Tout est à jour. Rien n'est à rajouter pour le moment !</p>
+    </div>
   </main>
+
+  <!-- Pied de page (Footer) pour les liens et la sécurité -->
+  <footer style="background-color: #1a1a1e; border-top: 2px solid #33333d; padding: 20px; text-align: center; color: #a1a1aa; font-size: 0.9rem;">
+    <div style="margin-bottom: 10px;">
+      <!-- Lien Nous Contacter (remplace par ton e-mail ou lien Discord) -->
+      <a href="mailto:contact@nirroxgames.com" style="color: #4f46e5; font-weight: bold; text-decoration: none; margin: 0 15px;">📧 Nous Contacter</a>
+      |
+      <span style="margin: 0 15px; color: #22c55e;">🔒 Connexion Sécurisée (GitHub Pages)</span>
+    </div>
+    <p style="margin: 5px 0 0 0;">&copy; 2026 Nirrox Games. Tous droits réservés.</p>
+  </footer>
 
   <!-- Script du fichier de configuration maintenance -->
   <script src="maintenance.js?v=0.5"></script>
 
-  <!-- Script d'exécution du mode maintenance -->
+  <!-- Script de gestion de la maintenance -->
   <script>
-    // Vérification de la variable définie dans maintenance.js
     if (typeof modeMaintenance !== 'undefined' && modeMaintenance === true) {
       document.body.innerHTML = `
-        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #121214; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px;">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background-color: #121214; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px;">
           <h1 style="color: #ef4444; font-size: 2.5rem; margin-bottom: 10px;">🛠️ Site en Maintenance</h1>
-          <p style="font-size: 1.2rem; color: #a1a1aa;">Nirrox Games fait peau neuve ou met à jour ses jeux. Revenez très vite !</p>
+          <p style="font-size: 1.2rem; color: #a1a1aa; margin-bottom: 25px;">Nirrox Games fait peau neuve. Revenez très vite !</p>
+          
+          <button onclick="toggleDetails()" style="background-color: #4f46e5; color: white; border: none; padding: 12px 24px; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer;">
+            En savoir plus
+          </button>
+
+          <div id="infos-details" style="display: none; margin-top: 20px; background-color: #1a1a1e; border: 1px solid #33333d; padding: 20px; border-radius: 10px; max-width: 400px; text-align: left;">
+            <h3 style="color: #4f46e5; margin-top: 0;">🚀 En savoir plus</h3>
+            <p style="color: #a1a1aa; line-height: 1.5;">Des améliorations et de nouveaux jeux sont en cours de développement.</p>
+            <p style="margin-top: 15px;">
+              👉 <a href="mailto:contact@nirroxgames.com" style="color: #38bdf8; font-weight: bold; text-decoration: underline;">Nous contacter pendant la maintenance</a>
+            </p>
+          </div>
         </div>
       `;
+    }
+
+    function toggleDetails() {
+      const details = document.getElementById('infos-details');
+      if (details.style.display === 'none') {
+        details.style.display = 'block';
+      } else {
+        details.style.display = 'none';
+      }
     }
   </script>
 
