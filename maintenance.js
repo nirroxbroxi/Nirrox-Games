@@ -5,8 +5,7 @@
 // 'true' = Site bloqué en Maintenance | 'false' = Site Ouvert
 const modeMaintenance = false;
 
-// Date exacte de lancement de Nirrox Games (Format: AAAA-MM-JJTHH:MM:SS)
-// Tu peux ajuster l'année, le mois et le jour selon la vraie date de création !
+// Date exacte de lancement de Nirrox Games (Modifie l'année, le mois ou le jour si besoin)
 const DATE_LANCEMENT_SITE = new Date("2026-01-01T00:00:00");
 
 // Webhook Discord pour notifications
@@ -33,13 +32,15 @@ function mettreAJourAgeSite() {
   const minutes = Math.floor((diffTemps / (1000 * 60)) % 60);
   const secondes = Math.floor((diffTemps / 1000) % 60);
 
-  // Formatage propre
+  // Affichage dynamique en direct
   elementCompteur.textContent = `${jours} jour(s), ${heures}h ${minutes}m ${secondes}s`;
 }
 
-// Met à jour chaque seconde le chronomètre
-setInterval(mettreAJourAgeSite, 1000);
-window.addEventListener("DOMContentLoaded", mettreAJourAgeSite);
+// Lancement de l'actualisation du chronomètre dès que la page est chargée, puis chaque seconde
+document.addEventListener("DOMContentLoaded", () => {
+  mettreAJourAgeSite();
+  setInterval(mettreAJourAgeSite, 1000);
+});
 
 
 // ------------------------------------------
@@ -47,7 +48,6 @@ window.addEventListener("DOMContentLoaded", mettreAJourAgeSite);
 // ------------------------------------------
 function gestionDiscordMaintenance() {
   if (modeMaintenance) {
-    // Envoie la notification Discord UNIQUEMENT si cela n'a pas encore été fait pour ce cycle
     if (!localStorage.getItem("maintenance_discord_envoye")) {
       fetch(DISCORD_WEBHOOK_URL, {
         method: "POST",
@@ -71,10 +71,9 @@ function gestionDiscordMaintenance() {
       .catch(error => console.error("Erreur Webhook Discord:", error));
     }
   } else {
-    // Quand le site redevient ouvert (false), on réinitialise le verrou d'envoi Discord
     localStorage.removeItem("maintenance_discord_envoye");
   }
 }
 
-// Lancement automatique au chargement
+// Lancement du contrôle de maintenance
 gestionDiscordMaintenance();
