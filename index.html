@@ -5,30 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nirrox Games</title>
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Logo de l'onglet (Favicon) -->
+  <link rel="icon" type="image/png" href="Nirrox Games.png">
 </head>
 <body>
 
-  <!-- Ton en-tête normal -->
+  <!-- Ton en-tête avec le logo réduit, le titre au milieu et la version à droite -->
   <header class="navbar">
     <div class="nav-gauche">
       <a href="index.html">
         <img src="Nirrox Games.png" alt="Logo Nirrox Games" class="logo-img">
       </a>
     </div>
+    
     <h1 class="nav-titre">Nirrox Games</h1>
-    <span class="nav-version">Version Alpha 0.3</span>
+    
+    <span class="nav-version">Version Alpha 0.4</span>
   </header>
 
-  <!-- Le contenu principal de ton site -->
-  <main id="contenu-site" style="padding: 40px; text-align: center;">
+  <!-- Contenu principal de ton site -->
+  <main style="padding: 40px; text-align: center;">
     <h2>Bienvenue sur Nirrox Games !</h2>
     <p>Le site est ouvert et fonctionne normalement.</p>
   </main>
 
-  <!-- Script pour gérer la maintenance -->
+  <!-- Script pour gérer le mode maintenance -->
   <script src="maintenance.js"></script>
   <script>
-    // Si modeMaintenance est à true, on remplace le contenu de la page
     if (typeof modeMaintenance !== 'undefined' && modeMaintenance === true) {
       document.body.innerHTML = `
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #121214; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px;">
