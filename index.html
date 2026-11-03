@@ -1,111 +1,144 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nirrox Games - Beta</title>
-  
-  <!-- Versioning beta-1.1 pour contourner le cache -->
-  <link rel="stylesheet" href="style.css?v=beta-1.1">
-  <link rel="icon" type="image/png" href="Nirrox Games.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nirrox Games - Beta 1.1</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="Nirrox Games.png">
+<style>
+:root{--bg:#0f0f12;--card:#17171c;--surface:#202027;--text:#f4f4f6;--muted:#9a9aa6;--line:#2a2a33;--accent:#4f46e5;--accent-soft:#1b2540}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;min-height:100vh;display:flex;flex-direction:column;padding-bottom:70px}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;background:rgba(15,15,18,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:5}
+.nav{max-width:1120px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
+.links{display:flex;gap:4px}
+.links a{padding:6px 12px;border-radius:8px;color:var(--muted);font-weight:500;font-size:.95rem;cursor:pointer}
+.links a:hover,.links a.on{color:var(--text);background:var(--surface)}
+main{max-width:1120px;width:100%;margin:0 auto;padding:40px 24px;flex:1}
+.intro h1{font-size:clamp(1.8rem,4vw,2.4rem);margin:0 0 8px;letter-spacing:-.025em}
+.intro p{margin:0;color:var(--muted);max-width:480px}
+.count{font-size:.85rem;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;margin-top:24px}
+.soon{margin-top:40px;text-align:center;color:var(--muted);background:var(--card);border:1px solid var(--line);padding:30px;border-radius:14px}
+.soon strong{display:block;color:var(--text);font-size:1.1rem;margin-bottom:6px}
+.about{max-width:620px}.about h1{font-size:2rem;margin-bottom:12px}.about p{color:var(--muted);margin-bottom:14px;line-height:1.6}
+/* Banderole fixe en bas */
+#banderole-bas{position:fixed;bottom:0;left:0;width:100%;background-color:#16161a;border-top:1px solid var(--line);padding:12px 20px;z-index:1000;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:0.85rem;box-sizing:border-box}
+</style>
 </head>
 <body>
 
-  <!-- Barre de navigation -->
-  <header class="navbar">
-    <div class="nav-gauche">
-      <a href="index.html">
-        <img src="Nirrox Games.png" alt="Logo Nirrox Games" class="logo-img">
-      </a>
-    </div>
-    
-    <h1 class="nav-titre">Nirrox Games</h1>
-    <span class="nav-version">Version Beta 1.1</span>
-  </header>
-
-  <!-- Contenu principal (Affiché quand le site est ouvert) -->
-  <main id="contenu-principal" style="padding: 40px 20px 90px 20px; text-align: center; min-height: 60vh;">
-    <h2>Bienvenue sur Nirrox Games !</h2>
-    
-    <!-- Encadré Âge du Site (Chronomètre en arrière-plan) -->
-    <div style="margin: 25px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #38bdf8; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15);">
-      <h3 style="color: #38bdf8; margin-top: 0;">⏳ Âge officiel de Nirrox Games</h3>
-      <p id="compteur-age" style="color: #ffffff; font-size: 1.2rem; font-weight: bold; font-family: monospace; margin: 10px 0;">
-        Calcul en cours...
-      </p>
-      <p style="color: #a1a1aa; font-size: 0.85rem; margin: 0;">Le site évolue chaque jour grâce à vous !</p>
-    </div>
-
-    <!-- Message de bienvenue et statut -->
-    <div style="margin: 25px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #4f46e5; padding: 25px; border-radius: 12px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
-      <h3 style="color: #4f46e5; margin-top: 0; display: flex; align-items: center; gap: 10px;">
-        🚀 Passage en Version Bêta !
-      </h3>
-      <p style="color: #e4e4e7; line-height: 1.6;">
-        Le site est ouvert et fonctionnel en <strong>Version Beta 1.1</strong>.
-      </p>
-      <p style="color: #a1a1aa; line-height: 1.6;">
-        ⚠️ <strong>Note :</strong> Le site étant en plein développement, des ajustements sont faits régulièrement. Si vous remarquez un problème, contactez-nous sur Discord !
-      </p>
-      <div style="margin-top: 20px; text-align: center;">
-        <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="background-color: #5865F2; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
-          💬 Rejoindre le Discord
-        </a>
-      </div>
-    </div>
-
-    <!-- Encadré statut : Rien à rajouter -->
-    <div style="margin: 20px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #33333d; padding: 20px; border-radius: 10px; text-align: center;">
-      <h3 style="color: #22c55e; margin-top: 0;">✅ Statut du site</h3>
-      <p style="color: #d4d4d8; margin: 0;">Aucune maintenance en cours. Rien n'est à rajouter pour le moment !</p>
-    </div>
-  </main>
-
-  <!-- Banderole de bas de page interactive (Fixée en bas) -->
-  <div style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #16161a; border-top: 1px solid #33333d; padding: 12px 20px; box-shadow: 0 -4px 15px rgba(0,0,0,0.5); z-index: 1000; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-family: sans-serif; font-size: 0.9rem; box-sizing: border-box;">
-    
-    <!-- Partie Gauche : Statut des jeux -->
-    <div style="color: #a1a1aa; display: flex; align-items: center; gap: 8px;">
-      <span style="color: #f59e0b; font-weight: bold;">🎮 Aucun jeu disponible pour le moment... Allez !</span>
-    </div>
-
-    <!-- Partie Droite : Pourquoi Nirrox Games existe -->
-    <div style="color: #d4d4d8; max-width: 650px; text-align: left; font-size: 0.85rem;">
-      <strong style="color: #4f46e5;">Pourquoi Nirrox Games ?</strong> 
-      Créer un espace indépendant, fun et évolutif entre amis, partager nos créations, progresser en développement et bâtir une communauté passionnée ! 🚀
-    </div>
-
-    <!-- Bouton Discord rapide -->
-    <div>
-      <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="background-color: #5865F2; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.85rem;">
-        Discord
-      </a>
+<header>
+  <div class="nav">
+    <a class="logo" href="#" onclick="afficherPage('jeux')">
+      <img src="Nirrox Games.png" alt="Logo" width="28" height="28" style="border-radius:6px;">
+      <span>Nirrox Games</span>
+    </a>
+    <div class="links">
+      <a id="btn-jeux" class="on" onclick="afficherPage('jeux')">Jeux</a>
+      <a id="btn-apropos" onclick="afficherPage('apropos')">À propos</a>
     </div>
   </div>
+</header>
 
-  <!-- Script de maintenance & chronomètre -->
-  <script src="maintenance.js?v=beta-1.1"></script>
+<main id="app">
+  <!-- Contenu injecté dynamiquement par JavaScript -->
+</main>
 
-  <!-- Script d'affichage selon le statut de maintenance -->
-  <script>
-    if (typeof modeMaintenance !== 'undefined' && modeMaintenance === true) {
-      document.body.innerHTML = `
-        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background-color: #121214; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px;">
-          <h1 style="color: #ef4444; font-size: 2.5rem; margin-bottom: 10px;">🛠️ Site en Maintenance</h1>
-          <p style="font-size: 1.2rem; color: #a1a1aa; margin-bottom: 25px;">Nirrox Games est actuellement en cours de mise à jour.</p>
-          
-          <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-            <a href="en-savoir-plus.html" style="background-color: #4f46e5; color: white; padding: 12px 24px; font-size: 1rem; font-weight: bold; border-radius: 8px; text-decoration: none;">
-              En savoir plus
-            </a>
-            <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="background-color: #5865F2; color: white; padding: 12px 24px; font-size: 1rem; font-weight: bold; border-radius: 8px; text-decoration: none;">
-              Notre Discord
-            </a>
-          </div>
+<!-- Banderole de bas de page (fixée au scroll) -->
+<div id="banderole-bas">
+  <div style="color: #f59e0b; font-weight: bold;">
+    🎮 Aucun jeu disponible pour le moment... Allez !
+  </div>
+  <div style="color: #d4d4d8; max-width: 600px; font-size: 0.8rem;">
+    <strong style="color: #4f46e5;">Pourquoi Nirrox Games ?</strong> 
+    Créer un espace indépendant et fun entre amis, partager nos créations, progresser et bâtir une communauté passionnée ! 🚀
+  </div>
+  <div>
+    <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="background-color: #5865F2; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.8rem;">
+      Discord
+    </a>
+  </div>
+</div>
+
+<script>
+// Date de lancement (ajuste l'heure si besoin)
+const DATE_LANCEMENT_SITE = new Date("2026-11-03T19:00:00");
+
+function mettreAJourAgeSite() {
+  const el = document.getElementById("compteur-age");
+  if (!el) return;
+  const diff = new Date() - DATE_LANCEMENT_SITE;
+  if (diff < 0) { el.textContent = "Lancement imminent !"; return; }
+  
+  const j = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const m = Math.floor((diff / (1000 * 60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  if (j > 0) {
+    el.textContent = `${j} jour(s), ${h}h ${m}m ${s}s`;
+  } else if (h > 0) {
+    el.textContent = `${h}h ${m}m ${s}s`;
+  } else {
+    el.textContent = `${m} minute(s) et ${s} seconde(s)`;
+  }
+}
+
+// Gestion des pages (Jeux / À propos)
+function afficherPage(page) {
+  const app = document.getElementById('app');
+  const btnJeux = document.getElementById('btn-jeux');
+  const btnApropos = document.getElementById('btn-apropos');
+
+  if (page === 'jeux') {
+    btnJeux.classList.add('on');
+    btnApropos.classList.remove('on');
+    app.innerHTML = `
+      <section class="intro" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:28px;">
+        <div>
+          <h1>Joue directement,<br>sans rien installer.</h1>
+          <p>Une collection de jeux jouables dans ton navigateur, sur ordinateur comme sur mobile (Version Beta 1.1).</p>
         </div>
-      `;
-    }
-  </script>
+        <span class="count">0 jeu</span>
+      </section>
+
+      <!-- Chronomètre âge du site -->
+      <div style="background:var(--card); border:1px solid #38bdf8; padding:15px 20px; border-radius:12px; margin-bottom:24px; text-align:center;">
+        <span style="color:#38bdf8; font-weight:bold;">⏳ Âge du site : </span>
+        <span id="compteur-age" style="font-family:monospace; font-weight:bold;">Calcul...</span>
+      </div>
+
+      <div class="soon">
+        <strong>Les premiers jeux arrivent bientôt.</strong>
+        <p style="margin:6px 0 0; color:var(--muted);">Le site est tout récent, reviens d’ici quelques jours ou rejoins notre Discord !</p>
+      </div>
+    `;
+    mettreAJourAgeSite();
+  } else if (page === 'apropos') {
+    btnApropos.classList.add('on');
+    btnJeux.classList.remove('on');
+    app.innerHTML = `
+      <div class="about">
+        <h1>À propos de Nirrox Games</h1>
+        <p>Ce site rassemble les projets et jeux indépendants que nous créons. Ils sont pensés pour être joués directement dans le navigateur, sans téléchargement et entre amis.</p>
+        <p>Le site est actuellement en <strong>Version Beta 1.1</strong> : l'infrastructure se met en place et de superbes nouveautés arriveront très bientôt !</p>
+        <a href="https://discord.gg/vhmXpuRUa" target="_blank" style="display:inline-block; background:#5865F2; color:#fff; padding:10px 20px; border-radius:8px; font-weight:600; margin-top:10px;">
+          Rejoindre notre Discord
+        </a>
+      </div>
+    `;
+  }
+  window.scrollTo(0, 0);
+}
+
+// Lancement par défaut sur la page jeux
+afficherPage('jeux');
+setInterval(mettreAJourAgeSite, 1000);
+</script>
 
 </body>
 </html>
