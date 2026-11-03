@@ -5,8 +5,8 @@
 // 'true' = Site bloqué en Maintenance | 'false' = Site Ouvert
 const modeMaintenance = false;
 
-// Date exacte de lancement de Nirrox Games (Modifie l'année, le mois ou le jour si besoin)
-const DATE_LANCEMENT_SITE = new Date("2026-01-01T00:00:00");
+// Date exacte de lancement d'aujourd'hui (Modifie l'heure T19:00:00 selon l'heure exacte !)
+const DATE_LANCEMENT_SITE = new Date("2026-11-03T19:00:00");
 
 // Webhook Discord pour notifications
 const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1567243944016744570/L2ZtLq84AaiL7nTiRa3X6FS8C1U944OfWJzczzt8HqHsbrTcIoXL9JHMlk9_XrNhmEoi";
@@ -22,7 +22,7 @@ function mettreAJourAgeSite() {
   const diffTemps = maintenant - DATE_LANCEMENT_SITE;
 
   if (diffTemps < 0) {
-    elementCompteur.textContent = "Le site sera lancé très bientôt !";
+    elementCompteur.textContent = "Le site vient tout juste de naître !";
     return;
   }
 
@@ -33,7 +33,13 @@ function mettreAJourAgeSite() {
   const secondes = Math.floor((diffTemps / 1000) % 60);
 
   // Affichage dynamique en direct
-  elementCompteur.textContent = `${jours} jour(s), ${heures}h ${minutes}m ${secondes}s`;
+  if (jours > 0) {
+    elementCompteur.textContent = `${jours} jour(s), ${heures}h ${minutes}m ${secondes}s`;
+  } else if (heures > 0) {
+    elementCompteur.textContent = `${heures}h ${minutes}m ${secondes}s`;
+  } else {
+    elementCompteur.textContent = `${minutes} minute(s) et ${secondes} seconde(s)`;
+  }
 }
 
 // Lancement de l'actualisation du chronomètre dès que la page est chargée, puis chaque seconde
