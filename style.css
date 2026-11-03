@@ -1,0 +1,23 @@
+.mon-entete {
+  display: flex; /* Active l'alignement intelligent */
+  justify-content: space-between; /* Espace les 3 éléments sur la ligne */
+  align-items: center; /* Aligne le texte verticalement au centre */
+  padding: 10px 20px; /* Ajoute un peu d'espace autour */
+  background-color: #f4f4f4; /* Optionnel : couleur de fond */
+}
+
+/* On donne la même largeur aux côtés pour que le titre reste parfaitement au milieu */
+.element-gauche, 
+.texte-droite {
+  width: 150px; /* Ajuste selon la taille de ton texte */
+}
+
+.titre-centre {
+  text-align: center;
+  margin: 0;
+}
+
+.texte-droite {
+  text-align: right;
+  font-size: 0.9em; /* Texte un peu plus petit */
+}
