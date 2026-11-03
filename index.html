@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nirrox Games - Beta</title>
   
-  <!-- Versioning beta-1.1 pour vider le cache du navigateur -->
+  <!-- Versioning beta-1.1 pour contourner le cache -->
   <link rel="stylesheet" href="style.css?v=beta-1.1">
   <link rel="icon" type="image/png" href="Nirrox Games.png">
 </head>
@@ -23,12 +23,21 @@
     <span class="nav-version">Version Beta 1.1</span>
   </header>
 
-  <!-- Contenu principal (Affiché quand le site N'EST PAS en maintenance) -->
+  <!-- Contenu principal (Affiché quand le site est ouvert) -->
   <main id="contenu-principal" style="padding: 40px 20px; text-align: center; min-height: 60vh;">
     <h2>Bienvenue sur Nirrox Games !</h2>
     
+    <!-- Encadré Âge du Site (Chronomètre en arrière-plan) -->
+    <div style="margin: 25px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #38bdf8; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.15);">
+      <h3 style="color: #38bdf8; margin-top: 0;">⏳ Âge officiel de Nirrox Games</h3>
+      <p id="compteur-age" style="color: #ffffff; font-size: 1.2rem; font-weight: bold; font-family: monospace; margin: 10px 0;">
+        Calcul de l'âge du site...
+      </p>
+      <p style="color: #a1a1aa; font-size: 0.85rem; margin: 0;">Le site évolue chaque jour grâce à vous !</p>
+    </div>
+
     <!-- Message de bienvenue et statut -->
-    <div style="margin: 30px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #4f46e5; padding: 25px; border-radius: 12px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
+    <div style="margin: 25px auto; max-width: 600px; background-color: #1a1a1e; border: 1px solid #4f46e5; padding: 25px; border-radius: 12px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
       <h3 style="color: #4f46e5; margin-top: 0; display: flex; align-items: center; gap: 10px;">
         🚀 Passage en Version Bêta !
       </h3>
@@ -62,10 +71,10 @@
     <p style="margin: 5px 0 0 0;">&copy; 2026 Nirrox Games. Tous droits réservés.</p>
   </footer>
 
-  <!-- Chargement des parametres de maintenance (v=beta-1.1 force la mise a jour) -->
+  <!-- Script de maintenance & chronomètre -->
   <script src="maintenance.js?v=beta-1.1"></script>
 
-  <!-- Execution de la bascule d'affichage -->
+  <!-- Script d'affichage selon le statut de maintenance -->
   <script>
     if (typeof modeMaintenance !== 'undefined' && modeMaintenance === true) {
       document.body.innerHTML = `
