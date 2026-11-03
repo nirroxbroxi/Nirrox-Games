@@ -2,42 +2,54 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #121214; /* Fond sombre moderne */
+  background-color: #121214;
   color: #ffffff;
 }
 
-/* En-tête / Barre de navigation */
+/* En-tête / Barre de navigation adaptative */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  padding: 15px 3%;
   background-color: #1a1a1e;
-  padding: 15px 30px;
   border-bottom: 2px solid #33333d;
+  box-sizing: border-box;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Éléments de la barre */
+/* Zone gauche avec le logo */
 .nav-gauche {
-  width: 150px; /* Même largeur que la version pour centrer parfaitement le titre */
+  display: flex;
+  align-items: center;
+  width: 150px;
 }
 
+.logo-img {
+  height: 45px; /* Ajuste la hauteur de ton logo selon tes envies */
+  width: auto;
+  display: block;
+}
+
+/* Titre au milieu */
 .nav-titre {
   margin: 0;
   font-size: 1.8rem;
   font-weight: 700;
   text-align: center;
-  color: #4f46e5; /* Couleur violet/bleu moderne */
+  color: #4f46e5;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
+/* Version à droite */
 .nav-version {
   width: 150px;
   text-align: right;
   font-size: 0.85rem;
   color: #a1a1aa;
   background-color: #27272a;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 12px;
 }
