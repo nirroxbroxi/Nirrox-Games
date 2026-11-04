@@ -3,7 +3,7 @@
 // ==========================================
 
 // 'true' = Site bloqué en Maintenance | 'false' = Site Ouvert
-const modeMaintenance = false;
+const modeMaintenance = true;
 
 // Date exacte de lancement d'aujourd'hui (Modifie l'heure T19:00:00 selon l'heure exacte !)
 const DATE_LANCEMENT_SITE = new Date("2026-11-03T19:00:00");
