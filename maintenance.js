@@ -2,10 +2,10 @@
 // CONFIGURATION DU SITE & MAINTENANCE - NIRROX GAMES
 // ==========================================
 
-// 'true' = Site bloqué en Maintenance | 'false' = Site Ouvert
-const modeMaintenance = true;
+// Ton ID JSONBin pour la gestion à distance
+const BIN_ID = "6aeb24b8ffd5d16053a56644";
 
-// Date exacte de lancement d'aujourd'hui (Modifie l'heure T19:00:00 selon l'heure exacte !)
+// Date exacte de lancement (Modifie si besoin)
 const DATE_LANCEMENT_SITE = new Date("2026-11-03T19:00:00");
 
 // Webhook Discord pour notifications
@@ -46,40 +46,62 @@ function mettreAJourAgeSite() {
 document.addEventListener("DOMContentLoaded", () => {
   mettreAJourAgeSite();
   setInterval(mettreAJourAgeSite, 1000);
+  
+  // Vérification de la maintenance au chargement de la page
+  verifierEtAppliquerMaintenance();
 });
 
 
 // ------------------------------------------
-// 2. GESTION DU BOT DISCORD POUR MAINTENANCE
+// 2. GESTION DE LA MAINTENANCE À DISTANCE & DISCORD
 // ------------------------------------------
-function gestionDiscordMaintenance() {
-  if (modeMaintenance) {
-    if (!localStorage.getItem("maintenance_discord_envoye")) {
-      fetch(DISCORD_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: "Nirrox Bot",
-          embeds: [{
-            title: "🛠️ Mode Maintenance Activé",
-            description: "Le site **Nirrox Games** vient de passer en maintenance (Beta 1.1). Les mises à jour sont en cours !",
-            color: 15158332,
-            footer: { text: "Nirrox Games - Notification Automatique" },
-            timestamp: new Date().toISOString()
-          }]
-        })
-      })
-      .then(response => {
-        if (response.ok) {
-          localStorage.setItem("maintenance_discord_envoye", "true");
-        }
-      })
-      .catch(error => console.error("Erreur Webhook Discord:", error));
-    }
-  } else {
-    localStorage.removeItem("maintenance_discord_envoye");
-  }
-}
+async function verifierEtAppliquerMaintenance() {
+    try {
+        // Interrogation de ton JSONBin en direct (avec anti-cache)
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest?nocache=` + new Date().getTime());
+        const data = await response.json();
+        
+        const modeMaintenance = data.record && data.record.maintenance === true;
 
-// Lancement du contrôle de maintenance
-gestionDiscordMaintenance();
+        if (modeMaintenance) {
+            // 1. Affichage de l'écran de maintenance sur le site
+            document.body.innerHTML = `
+                <div style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #0b0b0e; color: #fff; font-family: sans-serif; text-align: center; padding: 20px;">
+                    <h1 style="font-size: 2.5rem; margin-bottom: 10px;">🚧 Site en Maintenance</h1>
+                    <p style="color: #a0a0b0; font-size: 1.1rem; max-width: 500px;">
+                        ${data.record.message || "Nirrox Games est actuellement en cours de mise à jour. Revenez très vite !"}
+                    </p>
+                </div>
+            `;
+
+            // 2. Gestion du Webhook Discord (si pas déjà envoyé)
+            if (!localStorage.getItem("maintenance_discord_envoye")) {
+                fetch(DISCORD_WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        username: "Nirrox Bot",
+                        embeds: [{
+                            title: "🛠️ Mode Maintenance Activé",
+                            description: "Le site **Nirrox Games** vient de passer en maintenance à distance. Les mises à jour sont en cours !",
+                            color: 15158332,
+                            footer: { text: "Nirrox Games - Notification Automatique" },
+                            timestamp: new Date().toISOString()
+                        }]
+                    })
+                })
+                .then(res => {
+                    if (res.ok) {
+                        localStorage.setItem("maintenance_discord_envoye", "true");
+                    }
+                })
+                .catch(error => console.error("Erreur Webhook Discord:", error));
+            }
+        } else {
+            // Si le site n'est plus en maintenance, on nettoie le localStorage pour le prochain coup
+            localStorage.removeItem("maintenance_discord_envoye");
+        }
+    } catch (error) {
+        console.error("Erreur lors de la vérification de la maintenance :", error);
+    }
+}
