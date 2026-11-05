@@ -1,51 +1,505 @@
-// ==========================================
-// CONFIGURATION DE LA MAINTENANCE & DISCORD
-// ==========================================
-
-// 'true' = Site bloqué en Maintenance | 'false' = Site Ouvert
-const EST_EN_MAINTENANCE = false; 
-
-// Webhook Discord pour notifications automatiques
-const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1567243944016744570/L2ZtLq84AaiL7nTiRa3X6FS8C1U944OfWJzczzt8HqHsbrTcIoXL9JHMlk9_XrNhmEoi";
-
-// Gestion de la maintenance et du bot Discord
-if (EST_EN_MAINTENANCE) {
-    // 1. Affichage de la page de maintenance
-    document.addEventListener("DOMContentLoaded", () => {
-        document.body.innerHTML = `
-            <div style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #09090b; color: #fafafa; font-family: 'Plus Jakarta Sans', sans-serif; text-align: center; padding: 20px;">
-                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">🚧 Site en Maintenance</h1>
-                <p style="color: #a1a1aa; font-size: 1.1rem; max-width: 500px;">
-                    Nirrox Games est actuellement en cours de mise à jour. Revenez très vite !
-                </p>
-            </div>
-        `;
-    });
-
-    // 2. Envoi de l'alerte sur Discord (si pas déjà envoyée)
-    if (!localStorage.getItem("maintenance_discord_envoye")) {
-        fetch(DISCORD_WEBHOOK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                username: "Nirrox Bot",
-                embeds: [{
-                    title: "🛠️ Mode Maintenance Activé",
-                    description: "Le site **Nirrox Games** vient de passer en maintenance. Les mises à jour sont en cours !",
-                    color: 15158332,
-                    footer: { text: "Nirrox Games - Notification Automatique" },
-                    timestamp: new Date().toISOString()
-                }]
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                localStorage.setItem("maintenance_discord_envoye", "true");
-            }
-        })
-        .catch(error => console.error("Erreur Webhook Discord:", error));
-    }
-} else {
-    // Si le site n'est plus en maintenance, on réinitialise l'alerte pour la prochaine fois
-    localStorage.removeItem("maintenance_discord_envoye");
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nirrox Games - Site Officiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="Nirrox Games.png">
+<style>
+:root {
+  --bg: #09090b;
+  --card: #121216;
+  --card-hover: #18181f;
+  --surface: #1e1e24;
+  --text: #fafafa;
+  --muted: #a1a1aa;
+  --border: #27272a;
+  --accent: #4f46e5;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --disabled: #27272a;
 }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 90px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Header & Navbar */
+header {
+  position: sticky;
+  top: 0;
+  background: #09090bf2;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+}
+
+.logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  background: var(--card);
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.nav-links button {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-links button:hover { color: var(--text); }
+.nav-links button.active {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.btn-discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #5865F2;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+.btn-discord:hover { opacity: 0.9; }
+
+/* Contenu Principal */
+main {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 24px;
+  flex: 1;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.hero h1 span { color: #818cf8; }
+.hero p { color: var(--muted); font-size: 1.05rem; }
+
+/* Grille widgets */
+.grid-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.card-info {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.card-info h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.card-info .value {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.empty-state {
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: 20px;
+  padding: 50px 24px;
+  text-align: center;
+}
+
+.empty-state h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+.empty-state p { color: var(--muted); max-width: 440px; margin: 0 auto 20px; font-size: 0.95rem; }
+
+/* Grille Installation */
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.download-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.download-card .icon-os { font-size: 2.5rem; margin-bottom: 16px; }
+.download-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+.download-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; flex: 1; }
+
+.btn-disabled {
+  background: var(--disabled);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: not-allowed;
+}
+
+.btn-action {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.btn-action:hover { background: var(--surface); border-color: var(--accent); }
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+.modal-card {
+  background: #121216;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 { font-size: 1.3rem; font-weight: 800; }
+.close-btn { background: transparent; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; }
+
+/* Banderole Fixe Bas de Page */
+.ticker-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #121216f2;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+  padding: 12px 24px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.85rem;
+}
+
+.pwa-steps {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 12px;
+}
+.pwa-steps ol { margin-left: 20px; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<!-- Header de Navigation -->
+<header>
+  <div class="nav-container">
+    <div class="logo" onclick="changerPage('accueil')">
+      <img src="Nirrox Games.png" alt="Logo" onerror="this.src='https://via.placeholder.com/32/4f46e5/ffffff?text=NG'">
+      <span>Nirrox Games</span>
+    </div>
+
+    <div class="nav-links">
+      <button id="nav-accueil" class="active" onclick="changerPage('accueil')">Accueil</button>
+      <button id="nav-installation" onclick="changerPage('installation')">💻 Installation</button>
+      <button id="nav-apropos" onclick="changerPage('apropos')">À propos</button>
+    </div>
+
+    <div class="nav-right">
+      <a href="https://discord.gg/vhmXpuRUa" target="_blank" class="btn-discord">
+        Discord
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="app-container">
+  <!-- Le contenu est injecté immédiatement par le script -->
+</main>
+
+<!-- Modal Guide Chromebook PWA -->
+<div id="modal-chromebook" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2>💻 Installer sur Chromebook</h2>
+      <button class="close-btn" onclick="fermerModal('modal-chromebook')">&times;</button>
+    </div>
+    <p style="color: var(--muted); font-size: 0.9rem;">Installez Nirrox Games en application native sur ChromeOS :</p>
+    <div class="pwa-steps">
+      <ol>
+        <li>Regardez dans la barre d'adresse de votre navigateur Chrome.</li>
+        <li>Cliquez sur l'icône d'installation <strong>"Installer Nirrox Games"</strong>.</li>
+        <li>Validez. L'application apparaîtra directement dans votre lanceur Chromebook !</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- Banderole Bas de Page Fixe -->
+<div class="ticker-bar">
+  <div style="color: var(--warning); font-weight: 700;">
+    🚀 Plateforme Nirrox Games
+  </div>
+  <div style="color: var(--muted); max-width: 580px;">
+    <strong style="color: var(--text);">Pourquoi Nirrox Games ?</strong> Un espace indépendant et fun entre amis pour partager nos créations.
+  </div>
+  <div>
+    <a href="https://discord.gg/vhmXpuRUa" target="_blank" class="btn-discord">
+      Discord
+    </a>
+  </div>
+</div>
+
+<!-- On vérifie la maintenance si présente, sinon on exécute directement -->
+<script src="maintenance.js"></script>
+<script>
+const DATE_LANCEMENT_SITE = new Date("2026-11-03T19:00:00");
+
+function mettreAJourAge() {
+  const el = document.getElementById("compteur-age");
+  if (!el) return;
+  const diff = new Date() - DATE_LANCEMENT_SITE;
+  if (diff < 0) { el.textContent = "Lancement imminent"; return; }
+
+  const j = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const m = Math.floor((diff / (1000 * 60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  if (j > 0) {
+    el.textContent = `${j}j ${h}h ${m}m ${s}s`;
+  } else if (h > 0) {
+    el.textContent = `${h}h ${m}m ${s}s`;
+  } else {
+    el.textContent = `${m}m ${s}s`;
+  }
+}
+
+function changerPage(page) {
+  const container = document.getElementById("app-container");
+  const btnAccueil = document.getElementById("nav-accueil");
+  const btnInstallation = document.getElementById("nav-installation");
+  const btnApropos = document.getElementById("nav-apropos");
+
+  if (btnAccueil) btnAccueil.classList.remove('active');
+  if (btnInstallation) btnInstallation.classList.remove('active');
+  if (btnApropos) btnApropos.classList.remove('active');
+
+  if (page === 'accueil') {
+    if (btnAccueil) btnAccueil.classList.add('active');
+    container.innerHTML = `
+      <section class="hero">
+        <div>
+          <h1>Bienvenue sur <span>Nirrox Games</span></h1>
+          <p>Un espace indépendant dédié au partage et au développement de nos projets.</p>
+        </div>
+        <div style="background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 99px; font-weight: 600; font-size: 0.85rem; color: var(--muted);">
+          Beta 1.1 Active
+        </div>
+      </section>
+
+      <div class="grid-info">
+        <div class="card-info">
+          <h3>⏳ Âge du site en direct</h3>
+          <div class="value" id="compteur-age" style="font-family: monospace; color: #38bdf8;">Calcul...</div>
+        </div>
+        <div class="card-info">
+          <h3>🌐 Statut de la plateforme</h3>
+          <div class="value" style="color: var(--success);">En ligne</div>
+        </div>
+      </div>
+
+      <div class="empty-state">
+        <h3>Espace Communautaire</h3>
+        <p>Retrouvez toutes les nouveautés, mises à jour et échanges directement sur notre serveur Discord officiel !</p>
+        <a href="https://discord.gg/vhmXpuRUa" target="_blank" class="btn-discord" style="margin-top: 14px;">
+          💬 Rejoindre le Discord
+        </a>
+      </div>
+    `;
+    mettreAJourAge();
+  } else if (page === 'installation') {
+    if (btnInstallation) btnInstallation.classList.add('active');
+    container.innerHTML = `
+      <section class="hero">
+        <div>
+          <h1>Catégorie <span>Installation</span></h1>
+          <p>Accédez directement au site via nos solutions d'installation.</p>
+        </div>
+      </section>
+
+      <div class="downloads-grid">
+        <div class="download-card">
+          <div>
+            <div class="icon-os">🪟</div>
+            <h3>Launcher Windows (.EXE)</h3>
+            <p>Application autonome pour Windows 10/11 en version 64-bit.</p>
+          </div>
+          <div class="btn-disabled">
+            ❌ Indisponible pour le moment
+          </div>
+        </div>
+
+        <div class="download-card">
+          <div>
+            <div class="icon-os">💻</div>
+            <h3>Application Chromebook (ChromeOS)</h3>
+            <p>Installation Web App native certifiée pour ChromeOS.</p>
+          </div>
+          <button onclick="ouvrirModal('modal-chromebook')" class="btn-action">
+            ⚡ Guide d'installation Chromebook
+          </button>
+        </div>
+      </div>
+    `;
+  } else if (page === 'apropos') {
+    if (btnApropos) btnApropos.classList.add('active');
+    container.innerHTML = `
+      <div style="background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; max-width: 700px;">
+        <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 16px;">À propos de Nirrox Games</h2>
+        <p style="color: var(--muted); margin-bottom: 16px;">Nirrox Games est né d'une envie simple : concevoir un espace indépendant, rapide et agréable pour regrouper nos créations entre amis, sans fioritures.</p>
+        <a href="https://discord.gg/vhmXpuRUa" target="_blank" class="btn-discord">
+          Rejoindre l'aventure sur Discord
+        </a>
+      </div>
+    `;
+  }
+  window.scrollTo(0, 0);
+}
+
+function ouvrirModal(id) { 
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.add('active'); 
+}
+
+function fermerModal(id) { 
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.remove('active'); 
+}
+
+// Initialisation dès que le DOM est prêt pour éviter l'écran noir
+document.addEventListener("DOMContentLoaded", () => {
+  changerPage('accueil');
+  setInterval(mettreAJourAge, 1000);
+});
+</script>
+
+</body>
+</html>
