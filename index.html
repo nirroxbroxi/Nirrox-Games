@@ -101,6 +101,24 @@ header {
   color: var(--text);
 }
 
+.btn-play-site {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-play-site:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
 .btn-discord {
   display: inline-flex;
   align-items: center;
@@ -111,9 +129,7 @@ header {
   border-radius: 8px;
   font-weight: 700;
   font-size: 0.85rem;
-  transition: opacity 0.2s;
 }
-.btn-discord:hover { opacity: 0.9; }
 
 /* Contenu Principal */
 main {
@@ -146,7 +162,6 @@ main {
 .hero h1 span { color: #818cf8; }
 .hero p { color: var(--muted); font-size: 1.05rem; }
 
-/* Grille widgets */
 .grid-info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -173,18 +188,17 @@ main {
   font-weight: 700;
 }
 
-.empty-state {
+.portal-box {
   background: var(--card);
-  border: 1px dashed var(--border);
+  border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 50px 24px;
+  padding: 40px 24px;
   text-align: center;
 }
 
-.empty-state h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
-.empty-state p { color: var(--muted); max-width: 440px; margin: 0 auto 20px; font-size: 0.95rem; }
+.portal-box h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
+.portal-box p { color: var(--muted); max-width: 480px; margin: 0 auto 24px; font-size: 0.95rem; }
 
-/* Grille Installation */
 .downloads-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -236,7 +250,6 @@ main {
   gap: 8px;
   transition: all 0.2s ease;
 }
-.btn-action:hover { background: var(--surface); border-color: var(--accent); }
 
 /* Modals */
 .modal-overlay {
@@ -331,7 +344,7 @@ main {
 </header>
 
 <main id="app-container">
-  <!-- Le contenu est injecté immédiatement par le script -->
+  <!-- Injecté dynamiquement par JS -->
 </main>
 
 <!-- Modal Guide Chromebook PWA -->
@@ -367,7 +380,6 @@ main {
   </div>
 </div>
 
-<!-- On vérifie la maintenance si présente, sinon on exécute directement -->
 <script src="maintenance.js"></script>
 <script>
 const DATE_LANCEMENT_SITE = new Date("2026-11-03T19:00:00");
@@ -426,11 +438,11 @@ function changerPage(page) {
         </div>
       </div>
 
-      <div class="empty-state">
-        <h3>Espace Communautaire</h3>
-        <p>Retrouvez toutes les nouveautés, mises à jour et échanges directement sur notre serveur Discord officiel !</p>
-        <a href="https://discord.gg/vhmXpuRUa" target="_blank" class="btn-discord" style="margin-top: 14px;">
-          💬 Rejoindre le Discord
+      <div class="portal-box">
+        <h2>🎮 Jouer aux Jeux</h2>
+        <p>Accédez à notre plateforme dédiée pour jouer instantanément à tous nos jeux vidéo indépendants sans installation.</p>
+        <a href="https://nirroxbroxi.github.io/Nirrox-Games-official/" target="_blank" class="btn-play-site">
+          🚀 Accéder à la plateforme de jeux
         </a>
       </div>
     `;
@@ -494,7 +506,6 @@ function fermerModal(id) {
   if (modal) modal.classList.remove('active'); 
 }
 
-// Initialisation dès que le DOM est prêt pour éviter l'écran noir
 document.addEventListener("DOMContentLoaded", () => {
   changerPage('accueil');
   setInterval(mettreAJourAge, 1000);
